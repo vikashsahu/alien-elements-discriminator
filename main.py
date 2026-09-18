@@ -16,16 +16,16 @@ def index():
     return (
         """<form action="" method="get">
                 <label for="elements_1">Enter element to form compound:</label>
-                <input type="text" name="elements_1">
+                <input type="text" id="elements_1">
                 
                 <label for="counts_1">How many of this element:</label>
-                <input type="number" name="counts_1">
+                <input type="number" id="counts_1">
                 
                 <label for="elements_2">Enter second element to form compound:</label>
-                <input type="text" name="elements_2">
+                <input type="text" id="elements_2">
                 
                 <label for="counts_2">How many of this element:</label>
-                <input type="number" name="counts_2">
+                <input type="number" id="counts_2">
                 
                 <input type="submit" value="Send to Discriminator">
               </form>"""
