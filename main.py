@@ -13,46 +13,48 @@ def index():
 
     octet_result = check_octet_rule(elements_1, counts_1, elements_2, counts_2)
 
-    return (
-        """<form action="" method="get">
+    # note: the "name" attribute is used as a best practice for the label,
+    #       while the "id" attribute is required for the form to send data correctly.
+    htmlToReturn = """<form action="" method="get">
                 <label for="elements_1">Enter element to form compound:</label>
-                <input type="text" id="elements_1">
+                <input type="text" id="elements_1" name="elements_1">
+                <br/>
                 
                 <label for="counts_1">How many of this element:</label>
-                <input type="number" id="counts_1">
+                <input type="number" id="counts_1" name="counts_1">
+                <br/>
                 
                 <label for="elements_2">Enter second element to form compound:</label>
-                <input type="text" id="elements_2">
+                <input type="text" id="elements_2" name="elements_2">
+                <br/>
                 
                 <label for="counts_2">How many of this element:</label>
-                <input type="number" id="counts_2">
+                <input type="number" id="counts_2" name="counts_2">
+                <br/>
                 
                 <input type="submit" value="Send to Discriminator">
               </form>"""
-        + "Result: "
-        + octet_result
-    )
+
+    # submitting the form with any field being empty should not concatenate the result string
+    if elements_1 != "" and counts_1 != "" and elements_2 != "" and counts_2 != "":
+        htmlToReturn += "Result: " + octet_result
+
+    return htmlToReturn
 
 def check_octet_rule(elements_1, counts_1, elements_2, counts_2):
-    '''elements_1 = entry_elements_1.get().split(',')
-    counts_1 = list(map(int, entry_counts_1.get().split(',')))
-    elements_2 = entry_elements_2.get().split(',')
-    counts_2 = list(map(int, entry_counts_2.get().split(',')))'''
-
     all_elements = elements_1 + elements_2
     all_counts = counts_1 + counts_2
 
     compound = "".join([f"{element}{_subscript(count)}" if int(count) > 1 else element for element, count in zip(all_elements, all_counts)])
     total_valence = sum(get_valence_electrons(element) * int(count) for element, count in zip(all_elements, all_counts))
 
-    valence_text = f"Total valence electrons: {total_valence}"
-    compound_text = f"The compound formed is: {compound}"
+    valence_text = f"(total valence electrons: {total_valence})"
+    compound_text = f"The compound formed is: {compound}."
 
     if total_valence % 8 == 0:
-        return f"{compound_text}\n{valence_text}\nCompound passed!\nThe discriminator thinks this is a real compound!"
+        return f"Compound passed!\nThe discriminator thinks this is a real compound!<br/>{compound_text}\n{valence_text}\n"
     else:
-        return f"{compound_text}\n{valence_text}\nCompound failed.\nThe discriminator does not think this is a real compound."
-
+        return f"Compound failed.\nThe discriminator does not think this is a real compound.<br/>{compound_text}\n{valence_text}<br/>\n"
 
 def get_valence_electrons(element):
     # Dictionary containing the number of valence electrons for each element
@@ -80,6 +82,6 @@ def _subscript(number):
     subscript_numbers = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
     return str(number).translate(subscript_numbers)
 
-#DO NOT UPLOAD THIS LINE TO PYTHONANYWHERE
+#DO NOT UPLOAD THIS LINE TO PYTHONANYWHERE, USED FOR DEBUGGING ONLY
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
