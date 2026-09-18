@@ -82,6 +82,6 @@ def _subscript(number):
     subscript_numbers = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
     return str(number).translate(subscript_numbers)
 
-#DO NOT UPLOAD THIS LINE TO PYTHONANYWHERE, USED FOR DEBUGGING ONLY
+#DO NOT UPLOAD THIS LINE TO PYTHONANYWHERE, IT IS USED FOR DEBUGGING ONLY
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8080, debug=True)
