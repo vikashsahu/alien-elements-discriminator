@@ -17,7 +17,7 @@ A [Flask](https://flask.palletsprojects.com/en/stable/) application hosted on [p
 Live reloading isn't a thing (I'm pretty sure), so you'll likely need to stop and restart the app each time local changes are made. This could be a potential future improvement.
 
 ### Sample Valid Input: I₂T
-First Element: I
-First Element Count: 2
-Second Element: T
-Second Element Count: 1
+First Element: I   
+First Element Count: 2   
+Second Element: T   
+Second Element Count: 1   
