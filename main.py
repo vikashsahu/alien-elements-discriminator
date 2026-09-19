@@ -15,7 +15,10 @@ def index():
 
     # note: the "name" attribute is used as a best practice for the label,
     #       while the "id" attribute is required for the form to send data correctly.
-    htmlToReturn = """<form action="" method="get">
+    htmlToReturn = """
+                <h3>Octet Rule Checker</h3>
+                <h4>Try to create new valid compounds!</h4>
+                <form action="" method="get">
                 <label for="elements_1">Enter element to form compound:</label>
                 <input type="text" id="elements_1" name="elements_1">
                 <br/>
